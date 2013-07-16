@@ -34,5 +34,10 @@ namespace WOrderTracking
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AddNewOrder));
+        }
     }
 }
