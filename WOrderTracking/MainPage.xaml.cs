@@ -24,6 +24,7 @@ namespace WOrderTracking
         public MainPage()
         {
             this.InitializeComponent();
+            this.Frame.Navigate(typeof(MyOrders));
         }
 
         /// <summary>
@@ -33,6 +34,7 @@ namespace WOrderTracking
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            
         }
     }
 }
