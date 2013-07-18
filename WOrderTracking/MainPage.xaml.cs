@@ -36,5 +36,10 @@ namespace WOrderTracking
         {
             
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AddNewOrder));
+        }
     }
 }
