@@ -131,7 +131,6 @@
     <None Include="WOrderTracking_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Common\ReadMe.txt" />
     <Page Include="AddNewOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,7 +139,6 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Common\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
