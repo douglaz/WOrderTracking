@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WOrderTracking.Common;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -19,12 +20,13 @@ namespace WOrderTracking
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : LayoutAwarePage
     {
         public MainPage()
         {
             this.InitializeComponent();
-            this.Frame.Navigate(typeof(MyOrders));
+
+            MainFrame.Navigate(typeof(MyOrders));
         }
 
         /// <summary>
@@ -34,12 +36,17 @@ namespace WOrderTracking
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
+
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AddNewOrder));
+            MainFrame.Navigate(typeof(AddNewOrder));
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Create 
         }
     }
 }

@@ -13,56 +13,49 @@
     <Page.Resources>
         <x:String x:Key="AppName">My Orders</x:String>
         <DataTemplate x:Key="OrderTemplate">
-            <StackPanel Orientation="Horizontal" Width="300" Height="70">
+            <StackPanel Orientation="Horizontal" Width="300">
                 <Border Height="40" Width="40" Margin="10,10,0,10">
-                    <Image Source="/SampleImage.png" Stretch="UniformToFill"/>
+                    <Image Source="/Images/bag.png" Stretch="UniformToFill"/>
                 </Border>
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,10,0,0">
                     <TextBlock Text="{Binding Name}" Margin="10,0,0,0" 
                        Width="180" Height="20" HorizontalAlignment="Left" 
                        TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
                     <TextBlock Text="{Binding LastStatus}" 
-                       Margin="10,2,0,0" Width="180" Height="42" 
+                       Margin="10,2,0,0" Width="180" Height="60" 
                        TextTrimming="WordEllipsis" TextWrapping="Wrap" 
                        HorizontalAlignment="Left" Opacity="0.49"/>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
-
     </Page.Resources>
 
-    <!--
-        This grid acts as a root panel for the page that defines two rows:
-        * Row 0 contains the back button and page title
-        * Row 1 contains the rest of the page layout
-    -->
-    <Grid Style="{StaticResource LayoutRootStyle}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!-- Back button and page title -->
+    <Grid Style="{StaticResource LayoutRootStyle}" Background="DarkSeaGreen">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}" Margin="67,0,-37,36"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Page title -->
+            <Grid Grid.Row="0">
+                <TextBlock x:Name="PageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}" Margin="100, 50, 100, 20"/>
+            </Grid>
+
+            <!-- Content -->
+            <Grid Grid.Row="1" HorizontalAlignment="Left">
+                <GridView x:Name="MyOrdersGrid" HorizontalAlignment="Left" CanReorderItems="False" CanDragItems="False" 
+                          ItemTemplate="{StaticResource OrderTemplate}" FlowDirection="LeftToRight" ItemClick="MyOrdersGrid_ItemClick"
+                          SelectionChanged="MyOrdersGrid_SelectionChanged">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapGrid MaximumRowsOrColumns="6" VerticalChildrenAlignment="Top" HorizontalChildrenAlignment="Center" />
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
+            </Grid>
         </Grid>
 
-        <GridView x:Name="MyOrdersGrid" 
-          VerticalAlignment="Stretch" HorizontalAlignment="Left" 
-          CanReorderItems="True" CanDragItems="True" 
-          ItemTemplate="{StaticResource OrderTemplate}">
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapGrid MaximumRowsOrColumns="6" 
-                      VerticalChildrenAlignment="Top" HorizontalChildrenAlignment="Center" />
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-        </GridView>
-        
         <VisualStateManager.VisualStateGroups>
 
             <!-- Visual states reflect the application's view state -->
