@@ -11,6 +11,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WOrderTracking.Model;
+using WOrderTracking.View.Item;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -24,6 +26,52 @@ namespace WOrderTracking
         public OrderDetails()
         {
             this.InitializeComponent();
+            detailsList.ItemsSource = BuildOrders().First().StatusHistory.Select(s => new OrderStatusViewItem(s));
+
+        }
+
+        private IList<Order> BuildOrders()
+        {
+            return new List<Order>() { 
+                new Order() { 
+                    TrackingCode = "ABC678HUJ000", 
+                    Name = "Order1", 
+                    StatusHistory = new List<OrderStatus>(){
+                        new OrderStatus(){
+                            Date = DateTime.Now, 
+                            Local = "Jaguaré", 
+                            Status="Encaminhamento",
+                            },
+                            new OrderStatus(){
+                            Date = DateTime.Now.AddDays(-1), 
+                            Local = "Centro", 
+                            Status="Transferindo" 
+                            }
+                    }
+                }, 
+                new Order(){
+                    TrackingCode="64N5I56NIN",
+                    Name = "Order 2",
+                    StatusHistory = new List<OrderStatus>(){
+                        new OrderStatus(){
+                            Date = DateTime.Now.AddMonths(-2),
+                            Local = "São Paulo",
+                            Status = "Em transporte"
+                        }
+                    }
+                },
+                new Order(){
+                    TrackingCode="I4565IO4JIO",
+                    Name = "Order 3",
+                    StatusHistory = new List<OrderStatus>(){
+                        new OrderStatus(){
+                            Date = DateTime.Now.AddMonths(-2),
+                            Local = "Hong Kong",
+                            Status = "Enviado"
+                        }
+                    }
+                }
+            };
         }
 
         /// <summary>
