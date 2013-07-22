@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WOrderTracking.Model;
+using WOrderTracking.View.Item;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -25,7 +26,46 @@ namespace WOrderTracking
         public MyOrders()
         {
             this.InitializeComponent();
-            MyOrdersGrid.ItemsSource = new List<Order>() { new Order() { TrackingCode = "ABC678HUJ000", Name = "Order1" } };
+            MyOrdersGrid.ItemsSource = BuildOrders().Select(o => new OrderViewItem(o));
+
+        }
+
+        private IList<Order> BuildOrders()
+        {
+            return new List<Order>() { 
+                new Order() { 
+                    TrackingCode = "ABC678HUJ000", 
+                    Name = "Order1", 
+                    StatusHistory = new List<OrderStatus>(){
+                        new OrderStatus(){
+                            Date = DateTime.Today, 
+                            Local = "Jaguaré", 
+                            Status="Encaminhamento" } 
+                    }
+                }, 
+                new Order(){
+                    TrackingCode="64N5I56NIN",
+                    Name = "Order 2",
+                    StatusHistory = new List<OrderStatus>(){
+                        new OrderStatus(){
+                            Date = DateTime.Today.AddMonths(-2),
+                            Local = "São Paulo",
+                            Status = "Em transporte"
+                        }
+                    }
+                },
+                new Order(){
+                    TrackingCode="I4565IO4JIO",
+                    Name = "Order 3",
+                    StatusHistory = new List<OrderStatus>(){
+                        new OrderStatus(){
+                            Date = DateTime.Today.AddMonths(-2),
+                            Local = "Hong Kong",
+                            Status = "Enviado"
+                        }
+                    }
+                }
+            };
         }
 
         /// <summary>
@@ -49,6 +89,16 @@ namespace WOrderTracking
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
+        }
+
+        private void MyOrdersGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            //TODO: Redirect to history page with selected orders
+        }
+
+        private void MyOrdersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           //TODO: Change delete orders button to visible when any item is selected
         }
     }
 }
