@@ -120,15 +120,18 @@
     <Compile Include="OrderDetails.xaml.cs">
       <DependentUpon>OrderDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\OrderDAO.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ConfirmationMessageDialog.cs" />
     <Compile Include="Utils\SimpleMessageDialog.cs" />
     <Compile Include="Utils\TrackingCodeVerifier.cs" />
     <Compile Include="MyOrders.xaml.cs">
       <DependentUpon>MyOrders.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\IPageWithConfirmation.cs" />
     <Compile Include="View\Item\OrderStatusViewItem.cs" />
     <Compile Include="View\Item\OrderViewItem.cs" />
   </ItemGroup>
@@ -140,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\bag.png" />
+    <Content Include="Persistence\Orders.xml" />
     <Page Include="AddNewOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

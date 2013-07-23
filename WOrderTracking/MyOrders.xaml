@@ -14,8 +14,8 @@
         <x:String x:Key="AppName">My Orders</x:String>
         <DataTemplate x:Key="OrderTemplate">
             <StackPanel Orientation="Horizontal" Width="300">
-                <Border Height="40" Width="40" Margin="10,10,0,10">
-                    <Image Source="/Images/bag.png" Stretch="UniformToFill"/>
+                <Border Height="20" Width="50" Margin="10,10,0,10">
+                    <Image Source="/Images/bag.png" Stretch="None"/>
                 </Border>
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,10,0,0">
                     <TextBlock Text="{Binding Name}" Margin="10,0,0,0" 
@@ -44,12 +44,12 @@
 
             <!-- Content -->
             <Grid Grid.Row="1" HorizontalAlignment="Left">
-                <GridView x:Name="MyOrdersGrid" HorizontalAlignment="Left" CanReorderItems="False" CanDragItems="False" 
-                          ItemTemplate="{StaticResource OrderTemplate}" FlowDirection="LeftToRight" ItemClick="MyOrdersGrid_ItemClick"
+                <GridView x:Name="MyOrdersGrid" HorizontalAlignment="Left" CanReorderItems="False" CanDragItems="False" Margin="50, 50, 50, 50"
+                          ItemTemplate="{StaticResource OrderTemplate}" FlowDirection="LeftToRight" ItemClick="MyOrdersGrid_ItemClick" SelectionMode="Multiple"
                           SelectionChanged="MyOrdersGrid_SelectionChanged">
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapGrid MaximumRowsOrColumns="6" VerticalChildrenAlignment="Top" HorizontalChildrenAlignment="Center" />
+                            <StackPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
                 </GridView>
@@ -57,7 +57,6 @@
         </Grid>
 
         <VisualStateManager.VisualStateGroups>
-
             <!-- Visual states reflect the application's view state -->
             <VisualStateGroup x:Name="ApplicationViewStates">
                 <VisualState x:Name="FullScreenLandscape"/>
@@ -87,5 +86,19 @@
         </VisualStateManager.VisualStateGroups>
     </Grid>
 
-
+    <Page.BottomAppBar>
+        <AppBar x:Name="SharedBottomAppBar" Padding="10,0,10,0" AutomationProperties.Name="Bottom App Bar" IsSticky="True">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel x:Name="LeftPanel" Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
+                    <Button x:Name="AddOrderButton" Style="{StaticResource AddAppBarButtonStyle}" Tag="Add Order" Click="Add_Click"/>
+                    <Button x:Name="DeleteOrderButton" Style="{StaticResource DeleteAppBarButtonStyle}" Tag="Delete Order" Click="Delete_Click" Visibility="Collapsed">
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
 </common:LayoutAwarePage>

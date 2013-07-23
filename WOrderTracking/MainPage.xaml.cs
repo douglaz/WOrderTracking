@@ -90,15 +90,5 @@ namespace WOrderTracking
         {
 
         }
-
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(typeof(AddNewOrder));
-        }
-
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO: Create 
-        }
     }
 }

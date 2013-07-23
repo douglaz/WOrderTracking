@@ -12,6 +12,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WOrderTracking.Model;
+using WOrderTracking.Persistence;
+using WOrderTracking.Utils;
+using WOrderTracking.View;
 using WOrderTracking.View.Item;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
@@ -21,12 +24,18 @@ namespace WOrderTracking
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class MyOrders : WOrderTracking.Common.LayoutAwarePage
+    public sealed partial class MyOrders : WOrderTracking.Common.LayoutAwarePage, IPageWithConfirmation
     {
+        private IList<OrderViewItem> myOrders;
+        //private OrderDAO orderDAO = new OrderDAO();
+
         public MyOrders()
         {
             this.InitializeComponent();
-            MyOrdersGrid.ItemsSource = BuildOrders().Select(o => new OrderViewItem(o));
+            myOrders = BuildOrders().Select(o => new OrderViewItem(o)).ToList();
+            //myOrders = orderDAO.FindAll().Select(o => new OrderViewItem(o)).ToList(); ;
+
+            MyOrdersGrid.ItemsSource = myOrders;
 
         }
 
@@ -93,12 +102,38 @@ namespace WOrderTracking
 
         private void MyOrdersGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //TODO: Redirect to history page with selected orders
+            var orderId = ((OrderViewItem)e.ClickedItem).Id;
+            this.Frame.Navigate(typeof(OrderDetails), orderId);
         }
 
         private void MyOrdersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           //TODO: Change delete orders button to visible when any item is selected
+            DeleteOrderButton.Visibility = e.AddedItems.Any() ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AddNewOrder));
+        }
+
+        private async void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var messageDialog = new ConfirmationMessageDialog("Are you sure you want to delete this selected orders?", "Delete", this);
+            await messageDialog.ShowAsync();
+        }
+
+        public void DoCommandAfterConfirmation()
+        {
+            DeleteSelectedOrders();
+        }
+
+        private void DeleteSelectedOrders()
+        {
+            foreach (OrderViewItem order in MyOrdersGrid.SelectedItems)
+                myOrders.Remove(order);
+            //MyOrdersGrid.ItemsSource = myOrders;
+
+            SharedBottomAppBar.IsOpen = false;
         }
     }
 }

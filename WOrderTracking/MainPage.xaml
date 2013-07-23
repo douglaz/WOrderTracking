@@ -12,18 +12,5 @@
         <Frame x:Name="MainFrame"></Frame>
     </Grid>
 
-    <Page.BottomAppBar>
-        <AppBar x:Name="SharedBottomAppBar" Padding="10,0,10,0" AutomationProperties.Name="Bottom App Bar">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*"/>
-                    <ColumnDefinition Width="50*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel x:Name="LeftPanel" Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
-                    <Button x:Name="EditOrderButton" Style="{StaticResource AddAppBarButtonStyle}" Tag="Edit Order" Click="Edit_Click"/>
-                    <Button x:Name="DeleteOrderButton" Style="{StaticResource DeleteAppBarButtonStyle}" Tag="Delete Order" Click="Delete_Click" Visibility="Collapsed"/>
-                </StackPanel>
-            </Grid>
-        </AppBar>
-    </Page.BottomAppBar>
+    
 </common:LayoutAwarePage>
