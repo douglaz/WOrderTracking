@@ -37,6 +37,7 @@ namespace WOrderTracking
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
             var orderId = e.Parameter as long?;
             if (orderId.HasValue)
             {
