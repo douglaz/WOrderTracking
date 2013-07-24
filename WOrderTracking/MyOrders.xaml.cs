@@ -16,6 +16,7 @@ using WOrderTracking.Persistence;
 using WOrderTracking.Utils;
 using WOrderTracking.View;
 using WOrderTracking.View.Item;
+using System.Collections.ObjectModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -26,55 +27,28 @@ namespace WOrderTracking
     /// </summary>
     public sealed partial class MyOrders : WOrderTracking.Common.LayoutAwarePage, IPageWithConfirmation
     {
-        private IList<OrderViewItem> myOrders;
-        //private OrderDAO orderDAO = new OrderDAO();
+        private ObservableCollection<OrderViewItem> myOrders;
+        private OrderDAO orderDAO = new OrderDAO();
 
         public MyOrders()
         {
             this.InitializeComponent();
-            myOrders = BuildOrders().Select(o => new OrderViewItem(o)).ToList();
-            //myOrders = orderDAO.FindAll().Select(o => new OrderViewItem(o)).ToList(); ;
-
-            MyOrdersGrid.ItemsSource = myOrders;
-
+            myOrders = new ObservableCollection<OrderViewItem>();
+            OrderViewItemsSource.Source = myOrders;
+            SetOrders(orderDAO.FindAll().Select(o => new OrderViewItem(o)));
         }
 
-        private IList<Order> BuildOrders()
+        public void DoCommandAfterConfirmation()
         {
-            return new List<Order>() { 
-                new Order() { 
-                    TrackingCode = "ABC678HUJ000", 
-                    Name = "Order1", 
-                    StatusHistory = new List<OrderStatus>(){
-                        new OrderStatus(){
-                            Date = DateTime.Today, 
-                            Local = "Jaguaré", 
-                            Status="Encaminhamento" } 
-                    }
-                }, 
-                new Order(){
-                    TrackingCode="64N5I56NIN",
-                    Name = "Order 2",
-                    StatusHistory = new List<OrderStatus>(){
-                        new OrderStatus(){
-                            Date = DateTime.Today.AddMonths(-2),
-                            Local = "São Paulo",
-                            Status = "Em transporte"
-                        }
-                    }
-                },
-                new Order(){
-                    TrackingCode="I4565IO4JIO",
-                    Name = "Order 3",
-                    StatusHistory = new List<OrderStatus>(){
-                        new OrderStatus(){
-                            Date = DateTime.Today.AddMonths(-2),
-                            Local = "Hong Kong",
-                            Status = "Enviado"
-                        }
-                    }
-                }
-            };
+            DeleteSelectedOrders();
+        }
+
+        public void SetOrders(IEnumerable<OrderViewItem> orders)
+        {
+            foreach (var order in orders)
+            {
+                myOrders.Add(order);
+            }
         }
 
         /// <summary>
@@ -121,17 +95,14 @@ namespace WOrderTracking
             var messageDialog = new ConfirmationMessageDialog("Are you sure you want to delete this selected orders?", "Delete", this);
             await messageDialog.ShowAsync();
         }
-
-        public void DoCommandAfterConfirmation()
-        {
-            DeleteSelectedOrders();
-        }
-
+        
         private void DeleteSelectedOrders()
         {
-            foreach (OrderViewItem order in MyOrdersGrid.SelectedItems)
+            foreach (OrderViewItem order in MyOrdersGrid.SelectedItems.ToList())
+            {
                 myOrders.Remove(order);
-            //MyOrdersGrid.ItemsSource = myOrders;
+                //orderDAO.Delete(order.Wrapped);
+            }
 
             SharedBottomAppBar.IsOpen = false;
         }

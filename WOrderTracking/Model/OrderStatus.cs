@@ -9,12 +9,13 @@ namespace WOrderTracking.Model
 {
     public class OrderStatus
     {
-        [XmlElement("Date")]
+        [XmlAttribute("Date")]
         public DateTime Date { get; set; }
-        [XmlElement("Local")]
+        [XmlAttribute("Local")]
         public string Local { get; set; }
-        [XmlElement("Status")]
+        [XmlAttribute("Status")]
         public string Status { get; set; }
+        [XmlIgnoreAttribute]
         public string AdditionalInfo { get; set; }
     }
 }

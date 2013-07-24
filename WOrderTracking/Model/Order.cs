@@ -8,18 +8,18 @@ using System.Runtime.Serialization;
 
 namespace WOrderTracking.Model
 {
-    [DataContract]
+    [XmlRoot]
     public class Order
     {
-        [XmlElement("Id")]
+        [XmlAttribute("Id")]
         public long Id { get; set; }
-        [XmlElement("Name")]
+        [XmlAttribute("Name")]
         public string Name { get; set; }
-        [XmlElement("TrackingCode")]
+        [XmlAttribute("TrackingCode")]
         public string TrackingCode { get; set; }
-        [XmlArray("StatusHistory"), XmlArrayItem(typeof(OrderStatus), ElementName="OrderStatus")]
+        [XmlArray("StatusHistory"), XmlArrayItem(typeof(OrderStatus))]
         public List<OrderStatus> StatusHistory { get; set; }
-
+        [XmlIgnoreAttribute]
         public OrderStatus LastStatus
         {
             get

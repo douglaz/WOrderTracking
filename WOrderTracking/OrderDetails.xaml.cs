@@ -23,11 +23,22 @@ namespace WOrderTracking
     /// </summary>
     public sealed partial class OrderDetails : WOrderTracking.Common.LayoutAwarePage
     {
+        private IList<OrderStatusViewItem> orders;
+        private OrderViewItem currentOrder;
+
         public OrderDetails()
         {
             this.InitializeComponent();
-            detailsList.ItemsSource = BuildOrders().First().StatusHistory.Select(s => new OrderStatusViewItem(s));
+            orders = BuildOrders().First().StatusHistory.Select(s => new OrderStatusViewItem(s)).ToList();
+        }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var orderId = e.Parameter as long?;
+            if (orderId.HasValue)
+            {
+
+            }
         }
 
         private IList<Order> BuildOrders()

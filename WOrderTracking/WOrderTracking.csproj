@@ -142,8 +142,10 @@
     <None Include="WOrderTracking_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\bag.png" />
-    <Content Include="Persistence\Orders.xml" />
+    <Content Include="Images\package.png" />
+    <Content Include="Persistence\Orders.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Page Include="AddNewOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,7 +181,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="AppData\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

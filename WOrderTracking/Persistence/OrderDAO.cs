@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using WOrderTracking.Model;
-using Windows.ApplicationModel;
+using System.Linq;
 using System.Xml.Linq;
+using Windows.ApplicationModel;
+using Windows.Storage;
+using WOrderTracking.Model;
 
 namespace WOrderTracking.Persistence
 {
@@ -15,32 +13,41 @@ namespace WOrderTracking.Persistence
     {
         public IList<Order> FindAll()
         {
-            //var storageFolder = Package.Current.InstalledLocation;
-            //var storageFile =  storageFolder.GetFileAsync("Order.xml");
-
-            //var serializer = new XmlSerializer(typeof(List<Order>));
-            //using (var stream = new StreamReader("Order.xml"))
-            //{
-            //    return serializer.Deserialize(stream) as List<Order>;
-            //}
-
             var ordersXMLPath = Path.Combine(Package.Current.InstalledLocation.Path, "Persistence/Orders.xml");
             var loadedData = XDocument.Load(ordersXMLPath);
 
             var orders = loadedData.Descendants("Order").Select(o => new Order
                     {
-                        Id = (long)o.Element("Id"),
-                        Name = (string)o.Element("Name"),
-                        TrackingCode = (string)o.Element("TrackingCode"),
-                        StatusHistory = o.Descendants("StatusHistory").Select(s => new OrderStatus()
+                        Id = long.Parse(o.Attribute("Id").Value),
+                        Name = o.Attribute("Name").Value,
+                        TrackingCode = o.Attribute("TrackingCode").Value,
+                        StatusHistory = o.Descendants("StatusHistory").Elements().Select(s => new OrderStatus()
                         {
-                            Local = (string)s.Element("Local"),
-                            Status = (string)s.Element("Status"),
-                            Date = (DateTime)s.Element("Date")
+                            Local = s.Attribute("Local").Value,
+                            Status = s.Attribute("Status").Value,
+                            Date = DateTime.Parse(s.Attribute("Date").Value)
                         }).ToList()
                     });
 
             return orders.ToList();
+        }
+
+        public async void Delete(Order order)
+        {
+            var ordersXMLPath = Path.Combine(Package.Current.InstalledLocation.Path, "Persistence\\Orders.xml");
+            var uriPath = new Uri("ms-appx:///Persistence/Orders.xml");
+            StorageFile storageFile = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uriPath);
+
+            using (var file = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
+            {
+                using (var stream = file.AsStreamForWrite())
+                {
+                    var loadedData = XDocument.Load(ordersXMLPath);
+                    var orderToDelete = loadedData.Descendants("Order").Single(o => long.Parse(o.Attribute("Id").Value) == order.Id);
+                    orderToDelete.Remove();
+                    loadedData.Save(stream);
+                }
+            }
         }
     }
 }
