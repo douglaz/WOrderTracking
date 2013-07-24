@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WOrderTracking.Model;
+using WOrderTracking.Persistence;
 using WOrderTracking.View.Item;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
@@ -23,13 +24,15 @@ namespace WOrderTracking
     /// </summary>
     public sealed partial class OrderDetails : WOrderTracking.Common.LayoutAwarePage
     {
-        private IList<OrderStatusViewItem> orders;
+        private IList<OrderStatusViewItem> statusList;
+        private OrderDAO orderDAO;
         private OrderViewItem currentOrder;
 
         public OrderDetails()
         {
             this.InitializeComponent();
-            orders = BuildOrders().First().StatusHistory.Select(s => new OrderStatusViewItem(s)).ToList();
+            //statusList = BuildOrders().First().StatusHistory.Select(s => new OrderStatusViewItem(s)).ToList();
+            orderDAO = new OrderDAO();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -37,7 +40,9 @@ namespace WOrderTracking
             var orderId = e.Parameter as long?;
             if (orderId.HasValue)
             {
-
+                var order = orderDAO.FindById(orderId.Value);
+                statusList = order.StatusHistory.Select(s => new OrderStatusViewItem(s)).ToList();
+                DetailsList.ItemsSource = statusList;
             }
         }
 

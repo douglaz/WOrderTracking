@@ -142,6 +142,7 @@
     <None Include="WOrderTracking_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\magnifier.png" />
     <Content Include="Images\package.png" />
     <Content Include="Persistence\Orders.xml">
       <SubType>Designer</SubType>

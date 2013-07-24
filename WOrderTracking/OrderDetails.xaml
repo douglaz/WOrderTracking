@@ -13,7 +13,7 @@
     <Page.Resources>
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">Order Details</x:String>
     </Page.Resources>
 
     <!--
@@ -21,7 +21,7 @@
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Style="{StaticResource LayoutRootStyle}">
+    <Grid Style="{StaticResource LayoutRootStyle}" Background="LightSlateGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
@@ -36,7 +36,7 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-        <ListView HorizontalAlignment="Left" Height="224" Margin="76,63,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1209" HorizontalContentAlignment="Stretch" Name="detailsList">
+        <ListView HorizontalAlignment="Left" Height="224" Margin="76,63,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1209" HorizontalContentAlignment="Stretch" Name="DetailsList">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

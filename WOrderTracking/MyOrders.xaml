@@ -31,7 +31,7 @@
         <CollectionViewSource x:Name="OrderViewItemsSource" />
     </Page.Resources>
 
-    <Grid Style="{StaticResource LayoutRootStyle}" Background="SeaGreen">
+    <Grid Style="{StaticResource LayoutRootStyle}" Background="#045FB4">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -46,7 +46,7 @@
             <!-- Content -->
             <Grid Grid.Row="1" HorizontalAlignment="Left">
                 <GridView x:Name="MyOrdersGrid" HorizontalAlignment="Left" CanReorderItems="False" CanDragItems="False" Margin="50, 50, 50, 50"
-                          ItemTemplate="{StaticResource OrderTemplate}" FlowDirection="LeftToRight" ItemClick="MyOrdersGrid_ItemClick" SelectionMode="Multiple"
+                          ItemTemplate="{StaticResource OrderTemplate}" FlowDirection="LeftToRight" ItemClick="MyOrdersGrid_ItemClick" IsItemClickEnabled="True"  SelectionMode="Multiple"
                           SelectionChanged="MyOrdersGrid_SelectionChanged" ItemsSource="{Binding Mode=OneWay, Source={StaticResource OrderViewItemsSource}}">
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
