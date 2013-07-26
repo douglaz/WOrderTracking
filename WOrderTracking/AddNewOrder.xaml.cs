@@ -85,7 +85,7 @@ namespace WOrderTracking
             {
                 viewOrder.Name = orderName;
                 viewOrder.TrackingCode = orderTrackingCode;
-                this.Frame.Navigate(typeof(MainPage), viewOrder);
+                this.Frame.Navigate(typeof(MyOrders), viewOrder);
             }
             else
             {
