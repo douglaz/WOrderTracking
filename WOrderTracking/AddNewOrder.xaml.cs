@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WOrderTracking.Model;
+using WOrderTracking.Persistence;
 using WOrderTracking.Utils;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
@@ -26,10 +27,12 @@ namespace WOrderTracking
     public sealed partial class AddNewOrder : WOrderTracking.Common.LayoutAwarePage
     {
         private Order viewOrder;
+        private OrderDAO orderDAO;
 
         public AddNewOrder()
         {
             this.InitializeComponent();
+            this.orderDAO = new OrderDAO();
         }
 
         /// <summary>
@@ -49,7 +52,8 @@ namespace WOrderTracking
             }
             else
             {
-                viewOrder = (Order)navigationParameter;
+                var viewOrderId = (int)navigationParameter;
+                viewOrder = orderDAO.FindById(viewOrderId);
                 NameTextBox.Text = viewOrder.Name;
                 TrackingCodeTextBox.Text = viewOrder.TrackingCode;
             }
@@ -85,7 +89,8 @@ namespace WOrderTracking
             {
                 viewOrder.Name = orderName;
                 viewOrder.TrackingCode = orderTrackingCode;
-                this.Frame.Navigate(typeof(MyOrders), viewOrder);
+                orderDAO.Save(viewOrder);
+                this.Frame.Navigate(typeof(MyOrders));
             }
             else
             {
