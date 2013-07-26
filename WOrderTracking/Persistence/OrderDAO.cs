@@ -32,6 +32,11 @@ namespace WOrderTracking.Persistence
             return orders.ToList();
         }
 
+        public IEnumerable<Order> FindByName(string queryText)
+        {
+            return FindAll().Where(o => o.Name.ToLower().StartsWith(queryText.ToLower()));
+        }
+
         public Order FindById(long id)
         {
             return FindAll().SingleOrDefault(o => o.Id == id);

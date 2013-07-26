@@ -36,7 +36,7 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-        <ListView HorizontalAlignment="Left" Height="224" Margin="76,63,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1209" HorizontalContentAlignment="Stretch" Name="DetailsList">
+        <ListView HorizontalAlignment="Left" Height="224" Margin="76,63,0,0" Grid.Row="1" VerticalAlignment="Top" Width="1209" HorizontalContentAlignment="Stretch" Name="DetailsList" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

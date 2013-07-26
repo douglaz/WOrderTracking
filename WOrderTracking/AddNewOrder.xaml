@@ -13,7 +13,7 @@
     <Page.Resources>
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">Order Tracking</x:String>
+        <x:String x:Key="AppName">Add new Order</x:String>
         <x:String x:Key="AddNewPageTitle">TextBlock</x:String>
         <x:String x:Key="AddNewOrderPageTitle">Add New Order</x:String>
         <x:String x:Key="OrderName">Name</x:String>
@@ -40,7 +40,7 @@
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="122,50,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{StaticResource AddNewOrderPageTitle}" VerticalAlignment="Top" FontSize="56" FontFamily="Segoe UI" Style="{StaticResource HeaderTextStyle}"/>
+        <!--<TextBlock HorizontalAlignment="Left" Margin="122,50,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{StaticResource AddNewOrderPageTitle}" VerticalAlignment="Top" FontSize="56" FontFamily="Segoe UI" Style="{StaticResource HeaderTextStyle}"/>-->
         <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="120,148,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" Text="{StaticResource OrderName}" Background="White" BorderBrush="Red"/>
 
         <TextBox x:Name="TrackingCodeTextBox" HorizontalAlignment="Left" Margin="120,228,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" Text="{StaticResource OrderTrackingCode}"/>

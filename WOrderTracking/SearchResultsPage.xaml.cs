@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Search;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -13,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WOrderTracking.Model;
+using WOrderTracking.Persistence;
 
 // The Search Contract item template is documented at http://go.microsoft.com/fwlink/?LinkId=234240
 
@@ -23,10 +26,32 @@ namespace WOrderTracking
     /// </summary>
     public sealed partial class SearchResultsPage : WOrderTracking.Common.LayoutAwarePage
     {
+        SearchPane searchPane;
+        OrderDAO orderDAO;
+        string searchString;
 
         public SearchResultsPage()
         {
             this.InitializeComponent();
+            searchPane = SearchPane.GetForCurrentView();
+            orderDAO = new OrderDAO();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            searchPane.SuggestionsRequested += searchPane_SuggestionsRequested;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            searchPane.SuggestionsRequested -= searchPane_SuggestionsRequested;
+        }
+
+        void searchPane_SuggestionsRequested(SearchPane sender, SearchPaneSuggestionsRequestedEventArgs args)
+        {
+            args.Request.SearchSuggestionCollection.AppendQuerySuggestions(orderDAO.FindByName(args.QueryText).Take(5).Select(o => o.Name));
         }
 
         /// <summary>
@@ -40,7 +65,7 @@ namespace WOrderTracking
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            var queryText = navigationParameter as String;
+            searchString = navigationParameter as String;
 
             // TODO: Application-specific searching logic.  The search process is responsible for
             //       creating a list of user-selectable result categories:
@@ -55,7 +80,7 @@ namespace WOrderTracking
             filterList.Add(new Filter("All", 0, true));
 
             // Communicate results through the view model
-            this.DefaultViewModel["QueryText"] = '\u201c' + queryText + '\u201d';
+            this.DefaultViewModel["QueryText"] = '\u201c' + searchString + '\u201d';
             this.DefaultViewModel["Filters"] = filterList;
             this.DefaultViewModel["ShowFilters"] = filterList.Count > 1;
         }
@@ -75,8 +100,9 @@ namespace WOrderTracking
                 // RadioButton representation used when not snapped to reflect the change
                 selectedFilter.Active = true;
 
-                // TODO: Respond to the change in active filter by setting this.DefaultViewModel["Results"]
-                //       to a collection of items with bindable Image, Title, Subtitle, and Description properties
+                IEnumerable<Order> searchResults = orderDAO.FindAll().Where(o => o.Name.ToLower().Contains(searchString));
+
+                this.DefaultViewModel["Results"] = searchResults;
 
                 // Ensure results are found
                 object results;

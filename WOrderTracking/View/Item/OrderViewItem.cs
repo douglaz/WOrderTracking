@@ -16,7 +16,7 @@ namespace WOrderTracking.View.Item
         {
             get
             {
-                return Wrapped.LastStatus == null ? "No status" : string.Format("{0} - {1} - {2}", Wrapped.LastStatus.Date, Wrapped.LastStatus.Local, Wrapped.LastStatus.Status);
+                return Wrapped.LastStatus == null ? "No status" : string.Format("{0} - {1} - {2}", Wrapped.LastStatus.Date.ToString("dd/MM/yyyy hh:mm"), Wrapped.LastStatus.Local, Wrapped.LastStatus.Status);
             }
         }
 
