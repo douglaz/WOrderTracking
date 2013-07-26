@@ -1,40 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Orders>
-  <Order Id="1" Name="Order 1" TrackingCode="HG7G7H8JOKPDKE0">
-    <StatusHistory>
-      <OrderStatus Local="São Paulo" Status="Enviado" Date="2012-11-11"/>
-      <OrderStatus Local="Campinas" Status="Em transporte" Date="2012-11-12"/>
-    </StatusHistory>
-  </Order>
-  <Order Id="2" Name="Order 2" TrackingCode="F54U65EO8L6">
-    <StatusHistory>
-      <OrderStatus Local="Rio de Janeiro" Status="Enviado" Date="2013-05-31"/>
-      <OrderStatus Local="São Paulo" Status="Transferido" Date="2013-06-12"/>
-      <OrderStatus Local="Jaguaré" Status="Em transporte" Date="2013-06-14"/>
-    </StatusHistory>
-  </Order>
-  <Order Id="3" Name="Order 3" TrackingCode="H5HILP0ÇÇYIU">
-    <StatusHistory>
-      <OrderStatus Local="Hong Kong" Status="Enviado" Date="2011-03-15"/>
-      <OrderStatus Local="São Paulo" Status="Retido" Date="2011-05-12"/>
-    </StatusHistory>
-  </Order>
-  <Order Id="4" Name="Order 4" TrackingCode="5H65H776K87K87K8">
-    <StatusHistory>
-      <OrderStatus Local="São Paulo" Status="Enviado" Date="2012-11-11"/>
-      <OrderStatus Local="Campinas" Status="Em transporte" Date="2012-11-12"/>
-    </StatusHistory>
-  </Order>
-  <Order Id="5" Name="Order 5" TrackingCode="H6H5F4F34CV5H">
-    <StatusHistory>
-      <OrderStatus Local="São Paulo" Status="Enviado" Date="2012-11-11"/>
-      <OrderStatus Local="Campinas" Status="Em transporte" Date="2012-11-12"/>
-    </StatusHistory>
-  </Order>
-  <Order Id="6" Name="Order 6" TrackingCode="S23R4G567788">
-    <StatusHistory>
-      <OrderStatus Local="São Paulo" Status="Enviado" Date="2012-11-11"/>
-      <OrderStatus Local="Campinas" Status="Em transporte" Date="2012-11-12"/>
-    </StatusHistory>
-  </Order>
-</Orders>
+<OrdersContainer>
+  <Orders>
+    <Order Id="1" Name="Order 1" TrackingCode="HG7G7H8JOKPDKE0">
+      <StatusHistory>
+        <OrderStatus Local="São Paulo" Status="Enviado" Date="2012-11-11"/>
+        <OrderStatus Local="Campinas" Status="Em transporte" Date="2012-11-12"/>
+      </StatusHistory>
+    </Order>
+    <Order Id="2" Name="Order 2" TrackingCode="F54U65EO8L6">
+      <StatusHistory>
+        <OrderStatus Local="Rio de Janeiro" Status="Enviado" Date="2013-05-31"/>
+        <OrderStatus Local="São Paulo" Status="Transferido" Date="2013-06-12"/>
+        <OrderStatus Local="Jaguaré" Status="Em transporte" Date="2013-06-14"/>
+      </StatusHistory>
+    </Order>
+    <Order Id="3" Name="Order 3" TrackingCode="H5HILP0ÇÇYIU">
+      <StatusHistory>
+        <OrderStatus Local="Hong Kong" Status="Enviado" Date="2011-03-15"/>
+        <OrderStatus Local="São Paulo" Status="Retido" Date="2011-05-12"/>
+      </StatusHistory>
+    </Order>
+    <Order Id="4" Name="Order 4" TrackingCode="5H65H776K87K87K8">
+      <StatusHistory>
+        <OrderStatus Local="São Paulo" Status="Enviado" Date="2012-11-11"/>
+        <OrderStatus Local="Campinas" Status="Em transporte" Date="2012-11-12"/>
+      </StatusHistory>
+    </Order>
+    <Order Id="5" Name="Order 5" TrackingCode="H6H5F4F34CV5H">
+      <StatusHistory>
+        <OrderStatus Local="São Paulo" Status="Enviado" Date="2012-11-11"/>
+        <OrderStatus Local="Campinas" Status="Em transporte" Date="2012-11-12"/>
+      </StatusHistory>
+    </Order>
+    <Order Id="6" Name="Order 6" TrackingCode="S23R4G567788">
+      <StatusHistory>
+        <OrderStatus Local="São Paulo" Status="Enviado" Date="2012-11-11"/>
+        <OrderStatus Local="Campinas" Status="Em transporte" Date="2012-11-12"/>
+      </StatusHistory>
+    </Order>
+  </Orders>
+</OrdersContainer>
