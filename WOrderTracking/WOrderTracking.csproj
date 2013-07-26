@@ -106,6 +106,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\BackgroundTasksUtil.cs" />
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\BooleanNegationConverter.cs" />
     <Compile Include="Common\BooleanToVisibilityConverter.cs" />
@@ -121,9 +122,7 @@
     <Compile Include="OrderDetails.xaml.cs">
       <DependentUpon>OrderDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\AppSettingsDAO.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Persistence\AppSettingsDAO.cs" />
     <Compile Include="Persistence\OrderDAO.cs" />
     <Compile Include="SearchResultsPage.xaml.cs">
       <DependentUpon>SearchResultsPage.xaml</DependentUpon>
@@ -131,6 +130,7 @@
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tasks\CorreiosTask.cs" />
     <Compile Include="Utils\ConfirmationMessageDialog.cs" />
     <Compile Include="Utils\SimpleMessageDialog.cs" />
     <Compile Include="Utils\TrackingCodeVerifier.cs" />

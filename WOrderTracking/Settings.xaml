@@ -152,8 +152,8 @@
             </Grid>
             <ToggleSwitch Name="NotificationsSwitch" HorizontalAlignment="Left" Margin="69,45,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" BorderBrush="Black" Background="Black" Header="Notifications" IsOn="{Binding EnableNotifications, Mode=TwoWay}"   Toggled="ToggleSwitch_Toggled_1">
             </ToggleSwitch>
-            <Slider Name="NotificationsIntervalSlider" HorizontalAlignment="Left" Margin="69,141,0,0" Grid.Row="1" VerticalAlignment="Top" Width="161" Minimum="1" Maximum="600" SmallChange="5" StepFrequency="1" Value="{Binding NotificationsInterval, Mode=TwoWay}" ValueChanged="Slider_ValueChanged_1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="69,141,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Notifications Interval (s)" VerticalAlignment="Top"/>
+            <Slider Name="NotificationsIntervalSlider" HorizontalAlignment="Left" Margin="69,141,0,0" Grid.Row="1" VerticalAlignment="Top" Width="161" Minimum="15" Maximum="60" SmallChange="1" StepFrequency="1" Value="{Binding NotificationsInterval, Mode=TwoWay}" ValueChanged="Slider_ValueChanged_1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="69,141,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Notifications Interval (m)" VerticalAlignment="Top"/>
         </Grid>
     </Border>
 </UserControl>

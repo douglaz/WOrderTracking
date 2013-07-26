@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -13,6 +15,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WOrderTracking.Common;
+using WOrderTracking.Persistence;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -57,6 +61,34 @@ namespace WOrderTracking
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+
+                var appSettingsDAO = new AppSettingsDAO();
+                var settings = appSettingsDAO.Get();
+                if (settings.EnableNotifications)
+                {
+                    var trigger = new TimeTrigger(settings.NotificationsInterval, false);
+                    var condition = new SystemCondition(SystemConditionType.InternetAvailable);
+
+
+                    Task.Factory.StartNew(async () =>
+                    {
+                        // I really don't know what I'm doing
+                        try
+                        {
+                            // seems to not work on visual studio/simulator
+                            await BackgroundExecutionManager.RequestAccessAsync();
+                            // TODO: change trigger when settings change
+                            BackgroundTasksUtil.RegisterBackgroundTask("WOrderTracking.Tasks.CorreiosTask", "Correios Task", trigger, condition);
+                        }
+                        catch
+                        {
+                            // snif =(
+                        }
+                    });
+                    
+                    
+                }
+
             }
 
             if (rootFrame.Content == null)
