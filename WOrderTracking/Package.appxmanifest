@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="WOrderTracking.App">
-      <VisualElements DisplayName="WOrderTracking" Logo="Images\package_150.png" SmallLogo="Images\package_30.png" Description="WOrderTracking" ForegroundText="dark" BackgroundColor="#CED8F6">
+      <VisualElements DisplayName="WOrderTracking" Logo="Images\package_150.png" SmallLogo="Images\package_30.png" Description="WOrderTracking" ForegroundText="dark" BackgroundColor="#CED8F6" ToastCapable="true">
         <DefaultTile ShowName="allLogos" WideLogo="Images\package_310.png" ShortName="WTracking Order" />
         <SplashScreen Image="Images\package_splash.png" BackgroundColor="#CED8F6" />
       </VisualElements>
