@@ -37,6 +37,11 @@ namespace WOrderTracking.Persistence
             return FindAll().SingleOrDefault(o => o.Id == id);
         }
 
+        public void Save(Order order)
+        {
+            //TODO implement this
+        }
+
         public async void Delete(Order order)
         {
             var ordersXMLPath = Path.Combine(Package.Current.InstalledLocation.Path, "Persistence\\Orders.xml");

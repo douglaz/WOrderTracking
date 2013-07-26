@@ -17,9 +17,9 @@ namespace WOrderTracking.Persistence
         {
             var settingsValue = roamingSettings.Values["settings"] as ApplicationDataCompositeValue;
             if (settingsValue != null)
-                return new AppSettings() { EnableNotifications = (bool)settingsValue["enableNotifications"], NotificationsInterval = (int)settingsValue["notificationsInterval"] };
+                return new AppSettings() { EnableNotifications = (bool)settingsValue["enableNotifications"], NotificationsInterval = (uint)settingsValue["notificationsInterval"] };
             else
-                return new AppSettings();
+                return new AppSettings() { NotificationsInterval = 15 };
         }
 
         public void Save(AppSettings settings)
