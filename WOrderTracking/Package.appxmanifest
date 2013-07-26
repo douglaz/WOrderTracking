@@ -15,13 +15,31 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="WOrderTracking.App">
-      <VisualElements DisplayName="WOrderTracking" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="WOrderTracking" ForegroundText="light" BackgroundColor="#464646">
-        <DefaultTile ShowName="allLogos" />
-        <SplashScreen Image="Images\magnifier.png" BackgroundColor="#333399" />
+      <VisualElements DisplayName="WOrderTracking" Logo="Images\package_150.png" SmallLogo="Images\package_30.png" Description="WOrderTracking" ForegroundText="dark" BackgroundColor="#CED8F6">
+        <DefaultTile ShowName="allLogos" WideLogo="Images\package_310.png" ShortName="WTracking Order" />
+        <SplashScreen Image="Images\package_splash.png" BackgroundColor="#CED8F6" />
       </VisualElements>
+      <Extensions>
+        <Extension Category="windows.fileOpenPicker">
+          <FileOpenPicker>
+            <SupportedFileTypes>
+              <SupportsAnyFileType />
+            </SupportedFileTypes>
+          </FileOpenPicker>
+        </Extension>
+        <Extension Category="windows.fileTypeAssociation">
+          <FileTypeAssociation Name="xml_files">
+            <SupportedFileTypes>
+              <FileType>.xml</FileType>
+            </SupportedFileTypes>
+          </FileTypeAssociation>
+        </Extension>
+        <Extension Category="windows.search" />
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
+    <Capability Name="documentsLibrary" />
     <Capability Name="internetClient" />
   </Capabilities>
 </Package>

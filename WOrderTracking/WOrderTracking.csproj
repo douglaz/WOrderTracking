@@ -124,6 +124,9 @@
     </Compile>
     <Compile Include="Persistence\AppSettingsDAO.cs" />
     <Compile Include="Persistence\OrderDAO.cs" />
+    <Compile Include="SearchResultsPage.xaml.cs">
+      <DependentUpon>SearchResultsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
   <ItemGroup>
     <Content Include="Images\magnifier.png" />
     <Content Include="Images\package.png" />
+    <Content Include="Images\package_150.png" />
+    <Content Include="Images\package_30.png" />
+    <Content Include="Images\package_310.png" />
+    <Content Include="Images\package_splash.png" />
     <Content Include="Persistence\Orders.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -160,6 +167,10 @@
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Page Include="OrderDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchResultsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
