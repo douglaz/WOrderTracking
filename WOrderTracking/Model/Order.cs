@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using System.Xml.Linq;
 
 namespace WOrderTracking.Model
 {
@@ -31,6 +32,26 @@ namespace WOrderTracking.Model
         public Order()
         {
             this.StatusHistory = new List<OrderStatus>();
+        }
+
+        public Order(XElement xElement)
+        {
+            Id = long.Parse(xElement.Attribute("Id").Value);
+            Name = xElement.Attribute("Name").Value;
+            TrackingCode = xElement.Attribute("TrackingCode").Value;
+            StatusHistory = xElement.Descendants("StatusHistory").Elements().Select(o => new OrderStatus(o)).ToList();
+        }
+
+        public XElement ToXElement()
+        {
+            var xElement = new XElement("Order");
+            xElement.SetAttributeValue("Name", this.Name);
+            xElement.SetAttributeValue("TrackingCode", this.TrackingCode);
+            foreach (var status in StatusHistory)
+            {
+                xElement.Add(status.ToXElement());
+            }
+            return xElement;
         }
     }
 }

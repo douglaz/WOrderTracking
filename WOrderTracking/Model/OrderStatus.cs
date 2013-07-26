@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace WOrderTracking.Model
@@ -17,5 +18,25 @@ namespace WOrderTracking.Model
         public string Status { get; set; }
         [XmlIgnoreAttribute]
         public string AdditionalInfo { get; set; }
+
+        public OrderStatus()
+        {
+        }
+
+        public OrderStatus(XElement xElement)
+        {
+            Local = xElement.Attribute("Local").Value;
+            Status = xElement.Attribute("Status").Value;
+            Date = DateTime.Parse(xElement.Attribute("Date").Value);
+        }
+
+        public XElement ToXElement()
+        {
+            var xElement = new XElement("OrderStatus");
+            xElement.SetAttributeValue("Local", this.Local);
+            xElement.SetAttributeValue("Status", this.Status);
+            xElement.SetAttributeValue("Date", this.Date);
+            return xElement;
+        }
     }
 }

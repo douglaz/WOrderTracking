@@ -89,7 +89,7 @@ namespace WOrderTracking
             {
                 viewOrder.Name = orderName;
                 viewOrder.TrackingCode = orderTrackingCode;
-                orderDAO.Save(viewOrder);
+                //orderDAO.Save(viewOrder);
                 this.Frame.Navigate(typeof(MyOrders));
             }
             else
