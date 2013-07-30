@@ -53,15 +53,14 @@ namespace WOrderTracking.Persistence
             var uriPath = new Uri("ms-appx:///Persistence/Orders.xml");
             StorageFile storageFile = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(uriPath);
 
-            using (var file = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
+            var file = await Windows.Storage.KnownFolders.DocumentsLibrary.GetFileAsync("Orders.xml");
+
+            using (var stream = await file.OpenStreamForWriteAsync())
             {
-                using (var stream = file.AsStreamForWrite())
-                {
-                    var loadedData = XDocument.Load(ordersXMLPath);
-                    var orderToDelete = loadedData.Descendants("Order").Single(o => long.Parse(o.Attribute("Id").Value) == order.Id);
-                    orderToDelete.Remove();
-                    loadedData.Save(stream);
-                }
+                var loadedData = XDocument.Load(ordersXMLPath);
+                var orderToDelete = loadedData.Descendants("Order").Single(o => long.Parse(o.Attribute("Id").Value) == order.Id);
+                orderToDelete.Remove();
+                loadedData.Save(stream);
             }
         }
     }
